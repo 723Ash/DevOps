@@ -17,10 +17,15 @@ jobs:
       - name: Validate HTML file syntax
         run: |
           echo "Checking index.html syntax..."
-          # You can install and use tools like htmlhint, but here just a simple check:
           if grep -q "<html" index.html; then
             echo "HTML file looks fine!"
           else
             echo "HTML file does not contain <html> tag!"
             exit 1
           fi
+
+      - name: Upload index.html as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: index-html-file
+          path: index.html
